@@ -72,29 +72,52 @@ plusBtn.addEventListener('click', () => {
 
 const addBtn = document.querySelector('.add-cart')
 const cartItems = document.querySelector('.cart-items')
-const emptyText = document.querySelector('.empty')
-console.log(emptyText)
-addBtn.addEventListener('click', () => {
-    if (currentNum === 0) return
-    const price = document.querySelector('.price-sale h2').textContent.replace('$', '')
-    emptyText.classList.add('hide')
-    cartItems.innerHTML += `<div class="product-item">
-            <div class="cart-product">
+const emptyText = document.querySelector('.cart-items .empty')
+
+const createProductItem = (product) => {
+    const productItem = document.createElement('div')
+    productItem.classList.add('product-item')
+
+    productItem.innerHTML = `<div class="cart-product">
             <div class="info-product">
                 <img src="./images/image-product-1-thumbnail.jpg" alt="product 1 thumbnail">
                 <div class="name-price">
                 <p>Fall Limited Edition Sneakers</p>
-                <p>$${price} x <span id="num">${currentNum}</span> <span id="total-price">$${(currentNum*Number(price)).toFixed(2)}</span></p>
+                <p>$${product.price} x <span id="num">${product.quantity}</span> <span id="total-price">$${(product.quantity*Number(product.price)).toFixed(2)}</span></p>
                 </div>
             </div>
             <button type="button" class="delete">
                 <img src="./images/icon-delete.svg" alt="trash to delete product cart" class="trash">
             </button>
             </div>
-            <button class="checkout" type="button">Checkout</button>
-        </div>`
+            <button class="checkout" type="button">Checkout</button>`
+    return productItem
+}
+
+addBtn.addEventListener('click', () => {
+    if (currentNum === 0) return
+
+    const price = document.querySelector('.price-sale h2').textContent.replace('$', '')
+    emptyText.classList.add('hide')
+    cartItems.append(createProductItem({price: Number(price), quantity: currentNum}))
     
-    console.log(emptyText)
     currentNum = 0;
     numProduct.textContent = currentNum
+})
+
+// delete product item cart
+
+cartItems.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete') || e.target.classList.contains('trash')) {
+
+        const productItem = e.target.closest('.product-item')
+        
+        if (productItem) {
+            productItem.remove()
+
+            if (cartItems.querySelectorAll('.product-item').length === 0) {
+                emptyText.classList.remove('hide')
+            }
+        }
+    }
 })
