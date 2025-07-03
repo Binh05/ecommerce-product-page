@@ -53,18 +53,34 @@
     </header>
     <main class="content-container">
       <div class="content-header">
-        <button class="previous">
-          <img src="./images/icon-previous.svg" alt="icon previous">
-        </button>
-        <div class="product-wrapper">
-          <img src="./images/image-product-1.jpg" alt="image product 1">
-          <img src="./images/image-product-2.jpg" alt="image product 2">
-          <img src="./images/image-product-3.jpg" alt="image product 3">
-          <img src="./images/image-product-4.jpg" alt="image-product-4">
+        <div class="img-product">
+          <button class="previous">
+            <img src="./images/icon-previous.svg" alt="icon previous">
+          </button>
+          <div class="product-wrapper">
+            <img src="./images/image-product-1.jpg" alt="image product 1">
+            <img src="./images/image-product-2.jpg" alt="image product 2">
+            <img src="./images/image-product-3.jpg" alt="image product 3">
+            <img src="./images/image-product-4.jpg" alt="image-product-4">
+          </div>
+          <button class="next">
+            <img src="./images/icon-next.svg" alt="icon-next">
+          </button>
         </div>
-        <button class="next">
-          <img src="./images/icon-next.svg" alt="icon-next">
-        </button>
+        <div class="thumbnails">
+          <div class="thumbnail select">
+            <img src="./images/image-product-1-thumbnail.jpg" alt="thumbnail product">
+          </div>
+          <div class="thumbnail">
+            <img src="./images/image-product-2-thumbnail.jpg" alt="thumbnail product">
+          </div>
+          <div class="thumbnail">
+            <img src="./images/image-product-3-thumbnail.jpg" alt="thumbnail product">
+          </div>
+          <div class="thumbnail">
+            <img src="./images/image-product-4-thumbnail.jpg" alt="thumbnail product">
+          </div>
+        </div>
       </div>
       <div class="content-main">
         <p class="company">Sneaker Company</p>
@@ -80,19 +96,21 @@
           </div>
           <p class="original-price">$250.00</p>
         </div>
-        <div class="quantity">
-          <button class="minus" type="button">
-            <img src="./images/icon-minus.svg" alt="minus quantity">
-          </button>
-          <p>0</p>
-          <button class="plus" type="button">
-            <img src="./images/icon-plus.svg" alt="plus quantity">
+        <div class="quantity-add-cart">
+          <div class="quantity">
+            <button class="minus" type="button">
+              <img src="./images/icon-minus.svg" alt="minus quantity">
+            </button>
+            <p>0</p>
+            <button class="plus" type="button">
+              <img src="./images/icon-plus.svg" alt="plus quantity">
+            </button>
+          </div>
+          <button class="add-cart">
+            <img src="./images/icon-cart.svg" alt="cart icon">
+            <p>Add to cart</p>
           </button>
         </div>
-        <button class="add-cart">
-          <img src="./images/icon-cart.svg" alt="cart icon">
-          <p>Add to cart</p>
-        </button>
       </div>
     </main>
   </div>
