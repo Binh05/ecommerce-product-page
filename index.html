@@ -36,14 +36,33 @@
         </nav>
       </div>
       <div class="user">
-        <button type="button">
-          <img src="./images/icon-cart.svg" alt="cart" class="cart">
+        <button class="cart" type="button">
+          <img src="./images/icon-cart.svg" alt="cart">
         </button>
         <img src="./images/image-avatar.png" alt="avatar" class="avatar">
-        <div class="cart-item">
-          <p>Cart</p>
+        <div class="cart-container">
+          <div class="cart-title">
+            <p>Cart</p>
+          </div>
           <hr>
-          <p class="empty">Your cart is empty.</p>
+          <div class="cart-items">
+            <p class="empty ">Your cart is empty.</p>
+            <!-- <div class="product-item">
+              <div class="cart-product">
+                <div class="info-product">
+                  <img src="./images/image-product-1-thumbnail.jpg" alt="product 1 thumbnail">
+                  <div class="name-price">
+                    <p>Fall Limited Edition Sneakers</p>
+                    <p>$125.00 x <span id="num">3</span> <span id="total-price">$375.00</span></p>
+                  </div>
+                </div>
+                <button type="button" class="delete">
+                  <img src="./images/icon-delete.svg" alt="trash to delete product cart" class="trash">
+                </button>
+              </div>
+              <button class="checkout" type="button">Checkout</button>
+            </div> -->
+          </div>
         </div>
       </div>
     </header>
@@ -77,11 +96,11 @@
           <p class="original-price">$250.00</p>
         </div>
         <div class="quantity">
-          <button>
+          <button class="minus" type="button">
             <img src="./images/icon-minus.svg" alt="minus quantity">
           </button>
           <p>0</p>
-          <button>
+          <button class="plus" type="button">
             <img src="./images/icon-plus.svg" alt="plus quantity">
           </button>
         </div>
