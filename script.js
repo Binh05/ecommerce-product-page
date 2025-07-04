@@ -38,6 +38,22 @@ nextBtn.addEventListener('click', () => {
     updatePosition()
 })
 
+// img slide thumbnail
+
+const thumbnailWrapper = document.querySelector('.thumbnails')
+let selectThumbnail = document.querySelector('.select')
+
+thumbnailWrapper.addEventListener('click', (e) => {
+    const idx = Number(e.target.parentElement.value)
+    if (idx || idx === 0) {
+        currentPosition = step * idx * -1
+        updatePosition()
+        selectThumbnail.classList.remove('select')
+        selectThumbnail = e.target.parentElement
+        selectThumbnail.classList.add('select')
+    }
+})
+
 // cart button 
 
 const cartBtn = document.querySelector('.cart')

@@ -446,12 +446,13 @@ ul li a:hover {
         border-radius: 1rem;
     }
 
-    .content-header img {
+    .product-wrapper img {
         width: 100%;
         border-radius: .7rem;
+        cursor: pointer;
     }
 
-    .content-header button {
+    .img-product button {
         display: none;
     }
 
@@ -486,15 +487,16 @@ ul li a:hover {
     }
 
     .thumbnails {
-        display: flex;
-        margin-top: 1.5rem;
-        gap: 1.5rem;
+        display: grid;
+        margin-top: 4%;
+        grid-template-columns: repeat(4, 22%);
+        gap: 4%;
     }
 
     .select {
         position: relative;
         border-radius: .7rem;
-        border: .2rem solid var(--Orange);
+        border: .1rem solid var(--Orange);
     }
 
     .select::after {
@@ -512,11 +514,13 @@ ul li a:hover {
 
     .thumbnail {
         overflow: hidden;
+        cursor: pointer;
+        outline: none;
     }
 
     .thumbnail img {
-        object-fit: cover;
+        width: 100%;
         height: 100%;
-        border-radius: .7rem;
+        border-radius: .5rem;
     }
 }
