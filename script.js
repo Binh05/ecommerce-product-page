@@ -2,9 +2,84 @@ const menuBtn = document.querySelector('.logo-wrapper button')
 const closeBtn = document.querySelector('.close-btn')
 const screent = document.querySelector('.container')
 
-const previousBtn = document.querySelector('.previous')
-const nextBtn = document.querySelector('.next')
+function initSlider(root) {
+    const wrapperImg = root.querySelector('.product-wrapper')
+    const next = root.querySelector('.next')
+    const prev = root.querySelector('.previous')
+    const thumbnails = root.querySelector('.thumbnails')
+
+    let currentIndex = 0
+    const step = 100
+    const totalSlide = wrapperImg.querySelectorAll('img').length 
+    console.log(totalSlide)
+
+    const UpdateSlide = () => {
+        wrapperImg.style.transform = `translateX(-${step * currentIndex}%)`
+
+        const buttons = thumbnails.querySelectorAll('.thumbnail')
+        buttons.forEach(btn => btn.classList.remove('select'))
+        if (buttons[currentIndex]) buttons[currentIndex].classList.add('select')
+    }
+
+    prev?.addEventListener('click', () => {
+        currentIndex = Math.max(0, currentIndex - 1)
+        console.log(currentIndex)
+        UpdateSlide()
+    })
+
+    next?.addEventListener('click', () => {
+        currentIndex = Math.min(totalSlide - 1, currentIndex + 1)
+        console.log(currentIndex)
+        UpdateSlide()
+    })
+
+    thumbnails?.addEventListener('click', (e) => {
+        thumbnailTarget = e.target.closest('button.thumbnail')
+        if (!thumbnailTarget) return
+        currentIndex = Number(thumbnailTarget.value)
+        UpdateSlide()
+    })
+
+    UpdateSlide()
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initSlider(document)
+})
+
+// open light box
+
 const headerImg = document.querySelector('.product-wrapper')
+
+headerImg.addEventListener('click', () => {
+
+    if (window.innerWidth < 768) return;
+
+    const imgProduct = document.querySelector('.content-header')
+
+    const closeLbBtn = document.createElement('button')
+    closeLbBtn.innerHTML = '&times'
+    closeLbBtn.classList.add('close-light-box')
+
+    closeLbBtn.addEventListener('click', () => {
+        clone.remove()
+        document.body.classList.remove('light-box-open')
+        initSlider(document)
+    })
+
+    const clone = imgProduct.cloneNode(true)
+    clone.classList.remove('content-header')
+    clone.classList.add('light-box')
+
+    clone.prepend(closeLbBtn)
+
+    document.body.classList.add('light-box-open')
+    document.body.prepend(clone)
+
+    initSlider(clone)
+})
+
+// Menu nav
 
 menuBtn.addEventListener('click', () => {
     screent.classList.add('menu-open')
@@ -16,42 +91,6 @@ closeBtn.addEventListener('click', () => {
 
 screent.addEventListener('click', (e) => {
     e.target.classList.remove('menu-open')
-})
-
-// img slide
-
-let currentPosition = 0
-const step = 100
-const totalSldie = 4
-
-function updatePosition() {
-    headerImg.style.transform = `translateX(${currentPosition}%)`
-}
-
-previousBtn.addEventListener('click', () => {
-    currentPosition = Math.min(0, currentPosition + step)
-    updatePosition()
-})
-
-nextBtn.addEventListener('click', () => {
-    currentPosition = Math.max(-step*(totalSldie - 1), currentPosition - step)
-    updatePosition()
-})
-
-// img slide thumbnail
-
-const thumbnailWrapper = document.querySelector('.thumbnails')
-let selectThumbnail = document.querySelector('.select')
-
-thumbnailWrapper.addEventListener('click', (e) => {
-    const idx = Number(e.target.parentElement.value)
-    if (idx || idx === 0) {
-        currentPosition = step * idx * -1
-        updatePosition()
-        selectThumbnail.classList.remove('select')
-        selectThumbnail = e.target.parentElement
-        selectThumbnail.classList.add('select')
-    }
 })
 
 // cart button 
@@ -117,9 +156,22 @@ addBtn.addEventListener('click', () => {
     emptyText.classList.add('hide')
     cartItems.append(createProductItem({price: Number(price), quantity: currentNum}))
     
+    updateQuantityProduct(currentNum)
+
     currentNum = 0;
     numProduct.textContent = currentNum
 })
+
+// quantity product
+const quantityProductEL = document.querySelector('.quantity-product')
+let quantityProduct = 0
+
+function updateQuantityProduct(quantity) {
+    quantityProduct += quantity
+    quantityProductEL.textContent = quantityProduct
+    quantityProductEL.classList.remove('hide')
+    if (quantityProduct === 0) quantityProductEL.classList.add('hide')
+}
 
 // delete product item cart
 
@@ -127,7 +179,9 @@ cartItems.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete') || e.target.classList.contains('trash')) {
 
         const productItem = e.target.closest('.product-item')
-        
+
+        updateQuantityProduct(-1 * Number(productItem.querySelector('#num').textContent))
+
         if (productItem) {
             productItem.remove()
 
@@ -135,5 +189,6 @@ cartItems.addEventListener('click', (e) => {
                 emptyText.classList.remove('hide')
             }
         }
+
     }
 })
