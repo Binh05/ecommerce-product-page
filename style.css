@@ -479,6 +479,10 @@ ul li a:hover {
         border-radius: 1rem;
     }
 
+    .img-product-container {
+        min-height: 29rem;
+    }
+
     .product-wrapper img {
         width: 100%;
         border-radius: .7rem;
