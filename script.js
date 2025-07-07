@@ -34,7 +34,7 @@ function initSlider(root) {
     })
 
     thumbnails?.addEventListener('click', (e) => {
-        thumbnailTarget = e.target.closest('button.thumbnail')
+        const thumbnailTarget = e.target.closest('button.thumbnail')
         if (!thumbnailTarget) return
         currentIndex = Number(thumbnailTarget.value)
         UpdateSlide()
